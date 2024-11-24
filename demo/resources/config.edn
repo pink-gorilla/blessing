@@ -1,0 +1,11 @@
+{
+ 
+ :reval  {:rdocument  {:fpath ".reval/public/rdocument"
+                      :rpath "/r/rdocument"}
+         :collections {:study {:clj "quanta/notebook/study/"}
+                       :quanta-docs {:clj "quanta/notebook/docs/"}
+                       :demo {:clj "demo/notebook/" ; embedded notebooks in jars.
+                              :cljs "demo/notebook/"}}}
+
+;
+}

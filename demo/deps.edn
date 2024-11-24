@@ -1,0 +1,14 @@
+{:paths ["src"
+         "resources"]
+ :deps
+ {org.pinkgorilla/blessing {:local/root ".." :deps/manifest :deps}}
+ :aliases
+ {:blessing {; usecase: clj -X:quanta:backtest
+             :exec-fn modular.system/start!
+             :exec-args {:profile "jetty"
+                         :config ["config-shared.edn"
+                                  "config-backtest.edn"]
+                         :services "services.edn"}}
+
+;
+  }}

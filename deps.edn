@@ -1,0 +1,48 @@
+{:paths ["src"
+         "resources"]
+ :deps
+ {org.clojure/clojure    {:mvn/version "1.11.3"}
+  missionary/missionary {:mvn/version "b.40"} ; reactive framework.
+  org.pinkgorilla/goldly-docs {:mvn/version "0.9.71"}
+  nano-id/nano-id {:mvn/version "1.1.0"}
+  babashka/fs {:mvn/version "0.5.22"}
+  org.pinkgorilla/extension {:mvn/version "0.0.14"}
+  org.pinkgorilla/clj-service {:mvn/version "0.3.20"}
+  com.taoensso/telemere {:mvn/version "1.0.0-beta25"}
+  org.pinkgorilla/timbre {:mvn/version "0.0.7"}}
+
+ :aliases
+ {; https://github.com/weavejester/cljfmt
+  :cljfmt
+  {:extra-deps {cljfmt/cljfmt {:mvn/version "0.8.0"}}
+   :main-opts ["-m" "cljfmt.main"
+               "--indents" "cljfmt.edn"
+               "check"
+               "./src"
+               "./dev-plot/src"
+               "./dev/src"]}
+
+  :cljfmt-fix
+  {:extra-deps {cljfmt/cljfmt {:mvn/version "0.8.0"}}
+   :main-opts ["-m" "cljfmt.main"
+               "--indents" "cljfmt.edn"
+               "fix"
+               "./src"
+               "./dev-plot/src"
+               "./dev/src"]}
+
+; https://github.com/clj-kondo/clj-kondo/blob/master/doc/jvm.md
+  :lint
+  {:extra-deps {clj-kondo/clj-kondo {:mvn/version "2024.03.13"}}
+   :main-opts ["-m" "clj-kondo.main"
+               "--config" "cljkondo.edn"
+               "--fail-level" "error"
+               "--lint"
+               "./src"
+               "./dev-plot/src"]}
+
+
+
+
+;
+  }}

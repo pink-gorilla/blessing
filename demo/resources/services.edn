@@ -1,0 +1,41 @@
+ {:modular (modular.system/modular-env)  ; {:profile "jetty"  :config ["demo.edn" "secrets.edn"]}
+ :components
+ {:config {:start (modular.config/load-config! (:config #ref [:modular]))}
+
+  :exts {:start (extension/discover)}
+
+  :timbre {:start (modular.log/timbre-config!
+                   (:timbre/clj (deref (clip/ref :config))))}
+
+  ; empty map means no users are configured, so always permissioned.
+  :permission {:start (modular.permission.core/start-permissions {})}
+
+  :clj-service {:start (clj-service.core/start-clj-services
+                        (clip/ref :permission)
+                        (clip/ref :exts))}
+
+  :re-flow {:start (re-flow.core/start-clj-flow!
+                    {:clj-service (clip/ref :clj-service)
+                     :permission-service (clip/ref :permission)})}
+
+  :webly {:start (webly.app.app/start-webly
+                  (clip/ref :exts)
+                  (deref (clip/ref :config))
+                  (:profile #ref [:modular]))
+          :stop (webly.app.app/stop-webly this)}
+
+  :nrepl {:start (nrepl.server/start-server
+                  :bind "0.0.0.0"
+                  :port 9100
+                  :middleware cider.nrepl.middleware/cider-middleware
+                  :handler cider.nrepl/cider-nrepl-handler)
+          :stop (.close this)}
+
+  :dali-store {:start (dali.store.file/create-dali-file-store
+                       {:fpath ".data/public/dali"
+                        :rpath "/r/dali"})}
+
+
+
+;
+  }}
