@@ -16,3 +16,5 @@ binaries
 .data
 dev/.reval
 .cpcache
+.calva
+.webly

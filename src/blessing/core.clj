@@ -16,6 +16,7 @@
   ;(assert calculate "studio needs :calculate (calculation-dag settings)")
   (let [this {:dir dir
               :fns (atom {})
+              :runner (atom {})
               :env env
               }]
     (when dir
