@@ -9,7 +9,7 @@
    [dali.cljviewer :refer [clj-viewer]]
    [dali.container :refer [container-dimension]]
    [goldly.service.core :refer [clj]]
-   
+   [rtable.viewer.cheetah :refer [cheetah]]
    ))
 
 #_(defmethod component-ui "help" [{:keys [id]}]
@@ -48,9 +48,22 @@
   [:div
    (pr-str (keys @cells-a))])
 
+(defn cells1 []
+  [cheetah 
+   {:style {:width "100%"
+            :height "100%"}
+    :columns [{:field "id" :caption "id" :width 80}
+              {:field "fn" :caption "fn" :width 160}
+              {:field "env?" :caption "env" :width 20}
+              {:field "opts?" :caption "opts" :width 20}
+              {:field "args" :caption "args" :width 20}]
+    :data (or (vals @cells-a) [])
+    }])
+
+
 (defmethod component-ui "cells" [{:keys [id state]}]
   (fn [options]
-    [cells]))
+    [cells1]))
 
 
 
