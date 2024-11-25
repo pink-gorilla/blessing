@@ -2,7 +2,7 @@
   (:require
    [missionary.core :as m]))
 
-(def clock    ;; A shared process emitting `nil` every second.
+(def clock
   (m/signal
    (m/ap
     (println "creating clock!")

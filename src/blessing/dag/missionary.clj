@@ -43,8 +43,6 @@
 (defn add-atom-cell [dag cell-id a]
   (add-cell dag cell-id (m/signal (m/watch a))))
 
-
-
 ;(try
 ;      ;(warn "run-algo-safe else.. fn: " algo-fn)
 ;  (algo-fn env spec ds-bars)

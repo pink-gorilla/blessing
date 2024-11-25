@@ -18,3 +18,4 @@ dev/.reval
 .cpcache
 .calva
 .webly
+.lsp

@@ -26,8 +26,11 @@
   [live-dag {:keys [id fn env? sp? args]
              :or {args []}
              :as opts}]
-  (let [fn* (requiring-resolve fn)]
+  (let [fn* (requiring-resolve fn)
+        arglists (-> fn* meta :arglists)
+        ]
     (println "symbol: " fn " fn: " fn*)
+    (println "arglists: " arglists)
     (d/add-formula-cell
      live-dag
      id
