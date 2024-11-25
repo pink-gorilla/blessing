@@ -100,7 +100,6 @@
 ; 
   )
 
-()
 
 (defn add-formula-cell [dag cell-id {:keys [input] :as opts}]
   (assert dag "dag needs to be non nil")

@@ -21,6 +21,11 @@ b
                      :args [:a :c]
                      :env? false :sp? false})
 
+(s/add-cell b :test {:type :formula :id :n2 :fn 'demo.fn/borscht
+                     :args [:a :c]
+                     :env? true :sp? false})
+
+
 (s/add-cell b :test {:type :formula :id :r :fn 'demo.fn/random
                      :env? false :sp? false
                      })
@@ -47,6 +52,7 @@ b
 (r/start-log-cell b :test :a)
 (r/start-log-cell b :test :c)
 (r/start-log-cell b :test :n)
+(r/start-log-cell b :test :n2)
 (r/start-log-cell b :test :clock)
 (r/start-log-cell b :test :clock+c)
 
