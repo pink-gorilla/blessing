@@ -35,7 +35,15 @@
                        {:fpath ".data/public/dali"
                         :rpath "/r/dali"})}
 
-
-
+  :blessing {:start (blessing.core/start-blessing
+                       {:exts (clip/ref :exts)
+                        :clj (clip/ref :clj-service)
+                        :role nil
+                        :dir ".data/public/blessing/"
+                        :env  {:dali-store (clip/ref :dali-store)}})}
+  
+  :demo {:start (demo.init/init (clip/ref :blessing))}
+  
+    
 ;
   }}

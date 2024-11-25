@@ -5,6 +5,7 @@
    [nano-id.core :refer [nano-id]]
    [ui.flexlayout :refer [create-model layout add-node get-data]]
    [goldly.service.core :refer [clj]]
+   [blessing.component.source] ; side effects
    ))
 
 (def model-empty
@@ -24,8 +25,22 @@
                           :id "options"
                           :name "Options"
                           :component "option"
-                          :icon "/r/quanta/adjustments-vertical.svg"
-                          :enableClose false}]}]})
+                          ;:icon "/r/quanta/adjustments-vertical.svg"
+                          :enableClose false}
+                         {:type "tab"
+                          :id "source"
+                          :name "source"
+                          :component "source"
+                          ;:icon "/r/quanta/adjustments-vertical.svg"
+                          :enableClose false}
+                          {:type "tab"
+                          :id "cells"
+                          :name "cells"
+                          :component "cells"
+                                                   ;:icon "/r/quanta/adjustments-vertical.svg"
+                          :enableClose false}
+                         
+                         ]}]})
 
 (def m (r/atom (create-model
                 {:model model-empty
@@ -42,10 +57,6 @@
 ; keys: template-ids
 ; vals: {:options :current :views}
 
-#_(-> (clj 'quanta.studio.template.db/templates-info)
-    (p/then (fn [templates]
-              (println "templates: " (keys templates))
-              (reset! algo-templates-a templates))))
 
 (defonce files-a (r/atom []))
 
