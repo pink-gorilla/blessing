@@ -3,11 +3,9 @@
  :deps
  {org.pinkgorilla/blessing {:local/root ".." :deps/manifest :deps}}
  :aliases
- {:blessing {; usecase: clj -X:quanta:backtest
-             :exec-fn modular.system/start!
+ {:blessing {:exec-fn modular.system/start!
              :exec-args {:profile "jetty"
-                         :config ["config-shared.edn"
-                                  "config-backtest.edn"]
+                         :config ["config.edn"]
                          :services "services.edn"}}
 
 ;

@@ -2,8 +2,7 @@
   (:require
    [modular.system]
    [blessing.dag.storage :as s]
-   [blessing.dag.runner :as r]
-   ))
+   [blessing.dag.runner :as r]))
 
 
 (def b (modular.system/system :blessing))
@@ -27,8 +26,7 @@ b
 
 
 (s/add-cell b :test {:type :formula :id :r :fn 'demo.fn/random
-                     :env? false :sp? false
-                     })
+                     :env? false :sp? false})
 
 (s/add-cell b :test {:type :ap :id :clock :ap 'demo.flow/clock})
 

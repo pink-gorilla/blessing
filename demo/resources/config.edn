@@ -1,5 +1,12 @@
 {
  
+  :timbre/clj {:min-level [[#{"org.eclipse.jetty.*"} :warn]
+                          [#{"*"} :info]]
+              :appenders {:default {:type :console-color}
+                          :rolling {:type :file-rolling
+                                    :path "target/rolling.log"
+                                    :pattern :monthly}}}
+
  :reval  {:rdocument  {:fpath ".reval/public/rdocument"
                       :rpath "/r/rdocument"}
          :collections {:study {:clj "quanta/notebook/study/"}

@@ -42,7 +42,12 @@
        [frisk @data-a]])))
 
 
-(defonce cells-a (r/atom {}))
+(defonce cells-a 
+  (r/atom {:clock {:id :clock
+                   :type :ap 
+                   :ap 'demo.flow/clock
+                   :show false
+                   }}))
 
 (defn cells []
   [:div
@@ -56,8 +61,13 @@
               {:field "fn" :caption "fn" :width 160}
               {:field "env?" :caption "env" :width 20}
               {:field "opts?" :caption "opts" :width 20}
-              {:field "args" :caption "args" :width 20}]
+              {:field "args" :caption "args" :width 20}
+              {:field "show" :caption "show?" :width 50
+               :columnType "check" :action "check"}
+              
+              ]
     :data (or (vals @cells-a) [])
+    :watch #(println "watch: " %)
     }])
 
 
