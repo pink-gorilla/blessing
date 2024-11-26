@@ -3,7 +3,9 @@
    [taoensso.timbre :refer [info warn error]]
    [taoensso.telemere :as tm]
    [babashka.fs :as fs]
-   [clj-service.core :refer [expose-functions]]))
+   [clj-service.core :refer [expose-functions]]
+   [blessing.dag.websocket :refer [start-subscriptions!]]
+   ))
 
 (defn start-blessing
   "calculate are the dag opts {:log-dir :env}"
@@ -33,6 +35,7 @@
                            :permission role
                            :fixed-args [this]}))
       (warn "blessing starting without clj-services, perhaps you want to pass :clj key"))
+    (start-subscriptions! this)
     (info "blessing running!")
     this))
 

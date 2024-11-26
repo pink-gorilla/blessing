@@ -18,7 +18,7 @@
             :children [{:type "tabset"
                         :weight 50
                         :children [{:type "tab"
-                                    :id ":clock"
+                                    :id "clock"
                                     :name ":clock"
                                     :component "cell"}]}]}
    :borders [{:type "border"

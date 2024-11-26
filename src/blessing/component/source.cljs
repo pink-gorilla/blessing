@@ -5,11 +5,13 @@
    [nano-id.core :refer [nano-id]]
    [ui.flexlayout :refer [component-ui get-data]]
    [ui.frisk :refer [frisk]]
-   ;[re-flow.core :refer [flow-ui]]
+   [missionary.core :as m]
    [dali.cljviewer :refer [clj-viewer]]
    [dali.container :refer [container-dimension]]
+   [dali.viewer :refer [viewer2]]
    [goldly.service.core :refer [clj]]
    [rtable.viewer.cheetah :refer [cheetah]]
+   [blessing.dag.websocket :refer [subscription]]
    ))
 
 #_(defmethod component-ui "help" [{:keys [id]}]
@@ -103,11 +105,29 @@
   
   ))
 
-
-
 (defmethod component-ui "cell" [{:keys [id state]}]
+  (let [dag-id :test
+        cell-id (if (string? id)
+                   (keyword id)
+                   id)
+        topic {:dag-id dag-id
+               :cell-id cell-id}
+        flow (subscription topic)
+        a (r/atom nil)
+        task (m/reduce (fn [_ v]
+                         (println "processing value: " v)
+                         (reset! a v))
+                       nil
+                       flow)
+        dispose! (task
+                  #(println "success: " %)
+                  #(println "crash: " %))]
   (fn [options]
     [:div 
        [:p "cell: " (str id)]
-     
-     ]))
+       [:p "value: " (pr-str @a)]
+       (when-not (nil? @a)
+       [viewer2 @a]  
+         )
+       
+     ])))

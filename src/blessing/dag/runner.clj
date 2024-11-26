@@ -1,5 +1,7 @@
 (ns blessing.dag.runner
   (:require
+   [taoensso.timbre :refer [info error]]
+   [missionary.core :as m]
    [blessing.dag.storage :as storage]
    [blessing.dag.missionary :as d]))
 
@@ -67,5 +69,15 @@
   (let [live (get-dag this dag-id)]
     (d/start-log-cell live cell-id)))
 
-
-  
+(defn start-dali-cell
+  [this dag-id cell-id publish-fn]
+   (let [dag (get-dag this dag-id)
+         cell (d/get-cell dag cell-id)]
+  (if (and dag cell)
+    (let [dali-task (m/reduce (fn [_r v]
+                                (publish-fn v)
+                                nil)
+                              nil cell)]
+      (info "start dali-cell dag:" dag-id " cell: " cell-id)
+      (d/start! dag cell-id dali-task))
+    (str "cell " cell-id " not found - cannot start!"))))
