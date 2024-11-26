@@ -17,7 +17,10 @@
             :weight 100
             :children [{:type "tabset"
                         :weight 50
-                        :children []}]}
+                        :children [{:type "tab"
+                                    :id ":clock"
+                                    :name ":clock"
+                                    :component "cell"}]}]}
    :borders [{:type "border"
               :size 350
               :location "left"

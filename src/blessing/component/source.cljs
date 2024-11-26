@@ -103,3 +103,11 @@
   
   ))
 
+
+
+(defmethod component-ui "cell" [{:keys [id state]}]
+  (fn [options]
+    [:div 
+       [:p "cell: " (str id)]
+     
+     ]))
